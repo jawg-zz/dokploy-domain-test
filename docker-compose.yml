@@ -4,6 +4,8 @@ services:
     ports:
       - "3000"
     restart: unless-stopped
+    networks:
+      - dokploy-network
     environment:
       - NODE_ENV=production
     healthcheck:
@@ -25,3 +27,7 @@ services:
         - "traefik.http.routers.app.entrypoints=websecure"
         - "traefik.http.routers.app.tls.certresolver=letsencrypt"
         - "traefik.http.services.app.loadbalancer.server.port=3000"
+
+networks:
+  dokploy-network:
+    external: true
